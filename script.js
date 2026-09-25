@@ -362,5 +362,26 @@
       if (e.key === 'ArrowLeft') goPrev();
     }
   });
+/* ---------- Botão de música: mostra/esconde o card (sem pausar) ---------- */
+const musicToggle = document.getElementById('musicToggle');
 
+function toggleSpotifyCard() {
+  if (!spotifyCard) return;
+  const willShow = !spotifyCard.classList.contains('spotify-card--show');
+
+  if (willShow) {
+    spotifyCard.classList.add('spotify-card--show');
+  } else {
+    spotifyCard.classList.remove('spotify-card--show');
+    // NÃO chama pauseSpotify() — a música continua tocando normalmente
+  }
+
+  if (musicToggle) {
+    musicToggle.setAttribute('aria-pressed', String(willShow));
+  }
+}
+
+if (musicToggle) {
+  musicToggle.addEventListener('click', toggleSpotifyCard);
+}
 })();

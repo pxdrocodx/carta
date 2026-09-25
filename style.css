@@ -239,7 +239,25 @@ body{
 
 /* dá um feedback visual de que a barra é clicável */
 .spotify-progress { cursor: pointer; }
-
+.spotify-card {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity .25s ease, transform .25s ease, visibility .25s;
+}
+.spotify-card--show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.phone-ui__icon {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+}
 /* ============ LETTER PAPER ============ */
 .letter{
   position:relative;
