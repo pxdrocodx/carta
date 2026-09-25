@@ -235,6 +235,11 @@ body{
 }
 .spotify-card__ctrl--play svg{ width:16px; height:16px; }
 
+#spotifyAudio { display: none; }
+
+/* dá um feedback visual de que a barra é clicável */
+.spotify-progress { cursor: pointer; }
+
 /* ============ LETTER PAPER ============ */
 .letter{
   position:relative;

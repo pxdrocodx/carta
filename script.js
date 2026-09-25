@@ -3,29 +3,18 @@
 
   /* =========================================================================
      CONFIGURAÇÃO — edite aqui para adicionar páginas, textos e fotos.
-     Não precisa mexer em mais nada no arquivo para isso.
      ========================================================================= */
   const CONFIG = {
 
-    // Música que aparece no pop-up estilo Spotify (simulado, sem API).
+    // Música que aparece no pop-up estilo Spotify.
     music: {
-      title: 'Moonlight',
-      artist: 'Kali Uchis',
-      cover: 'assets/album-cover.svg',
-      durationSeconds: 188,   // 3:08
-      startAtSeconds: 102     // 1:42 — posição inicial só de enfeite
+      title: 'Menina',
+      artist: 'ZeVitor',
+      cover: 'assets/capa-musica.jpg',
+      src: 'assets/menina.mp3',
+      startAtSeconds: 0
     },
 
-    // Uma entrada em "pages" = uma página da carta.
-    // Adicione, remova ou reordene quantas quiser.
-    //
-    //   text              → texto da página (use \n\n para parágrafo em branco)
-    //   typewriter        → true só deve ser usado na 1ª página (efeito digitação)
-    //   showMusicAfter    → true faz o player do Spotify surgir ao fim da digitação
-    //   photos            → array de imagens da galeria PARA ESSA página específica
-    //                        (deixe [] se essa página não tiver galeria)
-    //   openGalleryOnEntry→ true abre a galeria automaticamente ao chegar nessa página
-    //                        (só na primeira vez que a pessoa visita a página)
     pages: [
       {
         text:
@@ -51,15 +40,6 @@
         ],
         openGalleryOnEntry: true
       }
-
-      // Exemplo de como adicionar uma 3ª página com fotos diferentes:
-      // {
-      //   text: 'Mais uma página só nossa...',
-      //   typewriter: false,
-      //   showMusicAfter: false,
-      //   photos: ['assets/polaroid1.svg'],
-      //   openGalleryOnEntry: false
-      // },
     ]
   };
   /* ========================================================================= */
@@ -67,22 +47,22 @@
 
   /* ---------- Elements ---------- */
   const envelopeScreen = document.getElementById('screen-envelope');
-  const letterScreen   = document.getElementById('screen-letter');
-  const envelope       = document.getElementById('envelope');
+  const letterScreen = document.getElementById('screen-letter');
+  const envelope = document.getElementById('envelope');
 
   const letterPageEl = document.getElementById('letterPage');
-  const pageTextEl   = document.getElementById('pageText');
-  const caretEl      = document.getElementById('caret');
-  const pageCountEl  = document.getElementById('pageCount');
+  const pageTextEl = document.getElementById('pageText');
+  const caretEl = document.getElementById('caret');
+  const pageCountEl = document.getElementById('pageCount');
 
-  const spotifyCard    = document.getElementById('spotifyCard');
-  const spotifyCover   = document.getElementById('spotifyCover');
-  const spotifyTitle   = document.getElementById('spotifyTitle');
-  const spotifyArtist  = document.getElementById('spotifyArtist');
-  const spotifyFill    = document.getElementById('spotifyFill');
+  const spotifyCard = document.getElementById('spotifyCard');
+  const spotifyCover = document.getElementById('spotifyCover');
+  const spotifyTitle = document.getElementById('spotifyTitle');
+  const spotifyArtist = document.getElementById('spotifyArtist');
+  const spotifyFill = document.getElementById('spotifyFill');
   const spotifyElapsed = document.getElementById('spotifyElapsed');
-  const spotifyDuration= document.getElementById('spotifyDuration');
-  const playPauseBtn   = document.getElementById('playPause');
+  const spotifyDuration = document.getElementById('spotifyDuration');
+  const playPauseBtn = document.getElementById('playPause');
 
   const prevPageBtn = document.getElementById('prevPage');
   const nextPageBtn = document.getElementById('nextPage');
@@ -90,13 +70,13 @@
   const photoFab = document.getElementById('photoFab');
   const photoDot = document.getElementById('photoDot');
 
-  const galleryModal   = document.getElementById('galleryModal');
-  const modalBackdrop  = document.getElementById('modalBackdrop');
-  const galleryClose   = document.getElementById('galleryClose');
-  const galleryPrev    = document.getElementById('galleryPrev');
-  const galleryNext    = document.getElementById('galleryNext');
-  const polaroidTrack  = document.getElementById('polaroidTrack');
-  const modalDotsWrap  = document.getElementById('modalDots');
+  const galleryModal = document.getElementById('galleryModal');
+  const modalBackdrop = document.getElementById('modalBackdrop');
+  const galleryClose = document.getElementById('galleryClose');
+  const galleryPrev = document.getElementById('galleryPrev');
+  const galleryNext = document.getElementById('galleryNext');
+  const polaroidTrack = document.getElementById('polaroidTrack');
+  const modalDotsWrap = document.getElementById('modalDots');
 
   /* ---------- State ---------- */
   let currentPageIndex = 0;
@@ -104,53 +84,100 @@
   let galleryOpenedFor = new Set();
   let galleryIndex = 0;
 
-  /* ---------- Spotify card setup ---------- */
+  /* ---------- Spotify card setup (com áudio real) ---------- */
+  const ICON_PAUSE = '<svg viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor"/><rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor"/></svg>';
+  const ICON_PLAY  = '<svg viewBox="0 0 24 24"><path d="M7 5l13 7-13 7V5z" fill="currentColor"/></svg>';
+
+  const audio = document.getElementById('spotifyAudio');
+
+  // Só define audio.src se o HTML não tiver <source> — assim não sobrescreve nada
+  if (audio && !audio.querySelector('source') && CONFIG.music.src) {
+    audio.src = CONFIG.music.src;
+  }
+
   function formatTime(s) {
+    if (!isFinite(s) || s < 0) s = 0;
     const m = Math.floor(s / 60);
     const sec = Math.floor(s % 60).toString().padStart(2, '0');
     return `${m}:${sec}`;
   }
 
-  spotifyCover.src = CONFIG.music.cover;
-  spotifyTitle.textContent = CONFIG.music.title;
-  spotifyArtist.textContent = CONFIG.music.artist;
-  spotifyDuration.textContent = formatTime(CONFIG.music.durationSeconds);
-
-  let elapsedSeconds = CONFIG.music.startAtSeconds;
-  let spotifyPlaying = false;
-  let spotifyTimer = null;
-  const ICON_PAUSE = '<svg viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor"/><rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor"/></svg>';
-  const ICON_PLAY  = '<svg viewBox="0 0 24 24"><path d="M7 5l13 7-13 7V5z" fill="currentColor"/></svg>';
+  if (spotifyCover) spotifyCover.src = CONFIG.music.cover;
+  if (spotifyTitle) spotifyTitle.textContent = CONFIG.music.title;
+  if (spotifyArtist) spotifyArtist.textContent = CONFIG.music.artist;
 
   function updateProgressUI() {
-    spotifyFill.style.width = `${(elapsedSeconds / CONFIG.music.durationSeconds) * 100}%`;
-    spotifyElapsed.textContent = formatTime(elapsedSeconds);
-  }
-
-  function tickProgress() {
-    elapsedSeconds += 1;
-    if (elapsedSeconds >= CONFIG.music.durationSeconds) elapsedSeconds = 0;
-    updateProgressUI();
+    if (!spotifyFill || !spotifyElapsed) return;
+    const dur = (audio && audio.duration) || 0;
+    const cur = (audio && audio.currentTime) || 0;
+    spotifyFill.style.width = dur ? `${(cur / dur) * 100}%` : '0%';
+    spotifyElapsed.textContent = formatTime(cur);
+    if (dur && spotifyDuration) spotifyDuration.textContent = formatTime(dur);
   }
 
   function playSpotify() {
-    spotifyPlaying = true;
-    playPauseBtn.innerHTML = ICON_PAUSE;
-    if (spotifyTimer) clearInterval(spotifyTimer);
-    spotifyTimer = setInterval(tickProgress, 1000);
+    if (!audio) return;
+    const p = audio.play();
+    if (p && typeof p.catch === 'function') {
+      p.catch(() => {
+        if (playPauseBtn) playPauseBtn.innerHTML = ICON_PLAY;
+      });
+    }
   }
 
   function pauseSpotify() {
-    spotifyPlaying = false;
-    playPauseBtn.innerHTML = ICON_PLAY;
-    if (spotifyTimer) clearInterval(spotifyTimer);
+    if (audio) audio.pause();
   }
 
-  playPauseBtn.addEventListener('click', () => {
-    spotifyPlaying ? pauseSpotify() : playSpotify();
-  });
+  if (audio) {
+    audio.preload = 'metadata';
+
+    audio.addEventListener('loadedmetadata', () => {
+      if (spotifyDuration) spotifyDuration.textContent = formatTime(audio.duration);
+      if (CONFIG.music.startAtSeconds > 0 && CONFIG.music.startAtSeconds < audio.duration) {
+        audio.currentTime = CONFIG.music.startAtSeconds;
+      }
+      updateProgressUI();
+    });
+
+    audio.addEventListener('timeupdate', updateProgressUI);
+
+    audio.addEventListener('ended', () => {
+      audio.pause();
+      audio.currentTime = 0;
+      updateProgressUI();
+    });
+
+    audio.addEventListener('pause', () => {
+      if (playPauseBtn) playPauseBtn.innerHTML = ICON_PLAY;
+    });
+    audio.addEventListener('play', () => {
+      if (playPauseBtn) playPauseBtn.innerHTML = ICON_PAUSE;
+    });
+  }
+
+  if (playPauseBtn) {
+    playPauseBtn.addEventListener('click', () => {
+      if (!audio) return;
+      audio.paused ? playSpotify() : pauseSpotify();
+    });
+  }
+
+  // seek — protegido contra progressWrap nulo
+  const progressWrap = spotifyFill ? spotifyFill.parentElement : null;
+  if (progressWrap) {
+    progressWrap.style.cursor = 'pointer';
+    progressWrap.addEventListener('click', (e) => {
+      if (!audio || !audio.duration) return;
+      const rect = progressWrap.getBoundingClientRect();
+      const ratio = Math.min(Math.max((e.clientX - rect.left) / rect.width, 0), 1);
+      audio.currentTime = ratio * audio.duration;
+      updateProgressUI();
+    });
+  }
 
   function showSpotifyCard() {
+    if (!spotifyCard) return;
     updateProgressUI();
     spotifyCard.classList.add('spotify-card--show');
     playSpotify();
@@ -283,8 +310,8 @@
     polaroids.forEach((p, i) => {
       p.dataset.state =
         i === galleryIndex ? 'active' :
-        i === (galleryIndex - 1 + total) % total ? 'prev' :
-        i === (galleryIndex + 1) % total ? 'next' : 'hidden';
+          i === (galleryIndex - 1 + total) % total ? 'prev' :
+            i === (galleryIndex + 1) % total ? 'next' : 'hidden';
     });
     buildDots(total);
   }
