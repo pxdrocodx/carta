@@ -54,7 +54,7 @@ Por isso tava sempre tentando te agradar, comprando os presentes que você queri
 `,
         typewriter: false,
         showMusicAfter: false,
-        photos: ["assets/20260225_162030.jpg"],
+        photos: ["assets/20260225_162030.jpg","assets/WhatsApp Image 2026-09-26 at 23.14.34.jpeg"],
         openGalleryOnEntry: false
       },
       {
