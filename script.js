@@ -18,14 +18,13 @@
     pages: [
       {
         text:
-          'Pra menina chata\n' 
-          //'Oi fofa, então tenho esse projetinho há um tempo. Era pra ter mandado pra você no seu aniversário, porém não tava gostando do texto, aí passou sem receber a cartinha. Vou reutilizar hoje, porque sim, não tem motivo específico pra isso.\n' +
-          //'Como é uma carta de um ano de amizade, se for pra ter acompanhamento de música, eu vou colocar nosso match do Spotify, Menina de ZeVitor, escuta se quiser. Resuminho de como funciona: algumas páginas têm fotos.'+
-          //'No ícone embaixo, só clicar que mostra algumas fotos. Se enjoar da música, na parte de cima mostra o player de música e esconde ele.\nEspero que goste…',
-          ,
+          'Pra menina chata\n' +
+          'Oi fofa, então tenho esse projetinho há um tempo. Era pra ter mandado pra você no seu aniversário, porém não tava gostando do texto, aí passou sem receber a cartinha. Vou reutilizar hoje, porque sim, não tem motivo específico pra isso.\n' +
+          'Como é uma carta de um ano de amizade, se for pra ter acompanhamento de música, eu vou colocar nosso match do Spotify, Menina de ZeVitor, escuta se quiser. Resuminho de como funciona: algumas páginas têm fotos.'+
+          'No ícone embaixo, só clicar que mostra algumas fotos. Se enjoar da música, na parte de cima mostra o player de música e esconde ele.\nEspero que goste…',
         typewriter: true,
         showMusicAfter: true,
-        photos: [],
+        photos: ["assets/IMG-20251006-WA0020.jpg"],
         openGalleryOnEntry: false
       },
       {
@@ -35,11 +34,7 @@ Obrigado por isso. Teve uma vez que eu guardo na memória: estávamos sentados e
 `,
         typewriter: false,
         showMusicAfter: false,
-        photos: [
-          'assets/polaroid1.svg',
-          'assets/polaroid2.svg',
-          'assets/polaroid3.svg'
-        ],
+        photos: ["assets/20260209_164344.jpg"],
         openGalleryOnEntry: false
       },
       {
@@ -49,11 +44,7 @@ E é compreensível. Na situação que você tava, ter com quem contar pra se ap
 `,
         typewriter: false,
         showMusicAfter: false,
-        photos: [
-          'assets/polaroid1.svg',
-          'assets/polaroid2.svg',
-          'assets/polaroid3.svg'
-        ],
+        photos: ['assets/Screenshot_20251001_152019_Instagram.jpg'],
         openGalleryOnEntry: false
       },
       {
@@ -63,11 +54,7 @@ Por isso tava sempre tentando te agradar, comprando os presentes que você queri
 `,
         typewriter: false,
         showMusicAfter: false,
-        photos: [
-          'assets/polaroid1.svg',
-          'assets/polaroid2.svg',
-          'assets/polaroid3.svg'
-        ],
+        photos: ["assets/20260225_162030.jpg"],
         openGalleryOnEntry: false
       },
       {
@@ -77,11 +64,7 @@ Adorei ter conhecido eles, porque ficar nessa cidade chata ia ficar muito mais f
 `,
         typewriter: false,
         showMusicAfter: false,
-        photos: [
-          'assets/polaroid1.svg',
-          'assets/polaroid2.svg',
-          'assets/polaroid3.svg'
-        ],
+        photos: ["assets/WhatsApp Image 2026-09-26 at 23.02.47.jpg"],
         openGalleryOnEntry: false
       },
       {
@@ -90,11 +73,7 @@ Mas por estar com você já melhorar. Tô renovando nosso contrato de amizade po
 `,
         typewriter: false,
         showMusicAfter: false,
-        photos: [
-          'assets/polaroid1.svg',
-          'assets/polaroid2.svg',
-          'assets/polaroid3.svg'
-        ],
+        photos: [],
         openGalleryOnEntry: false
       },
     ]
