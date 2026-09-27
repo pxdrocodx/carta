@@ -64,7 +64,7 @@ Adorei ter conhecido eles, porque ficar nessa cidade chata ia ficar muito mais f
 `,
         typewriter: false,
         showMusicAfter: false,
-        photos: ["assets/WhatsApp Image 2026-09-26 at 23.02.47.jpg"],
+        photos: ["assets/WhatsApp Image 2026-09-26 at 23.02.47.jpeg"],
         openGalleryOnEntry: false
       },
       {
