@@ -18,19 +18,21 @@
     pages: [
       {
         text:
-          'Querida Jeni,\n\n' +
-          'Bem-vinda a este cantinho especial feito só para ti.\n\n' +
-          'Espero que gostes do que preparei...',
+          'Pra menina chata\n' 
+          //'Oi fofa, então tenho esse projetinho há um tempo. Era pra ter mandado pra você no seu aniversário, porém não tava gostando do texto, aí passou sem receber a cartinha. Vou reutilizar hoje, porque sim, não tem motivo específico pra isso.\n' +
+          //'Como é uma carta de um ano de amizade, se for pra ter acompanhamento de música, eu vou colocar nosso match do Spotify, Menina de ZeVitor, escuta se quiser. Resuminho de como funciona: algumas páginas têm fotos.'+
+          //'No ícone embaixo, só clicar que mostra algumas fotos. Se enjoar da música, na parte de cima mostra o player de música e esconde ele.\nEspero que goste…',
+          ,
         typewriter: true,
         showMusicAfter: true,
         photos: [],
         openGalleryOnEntry: false
       },
       {
-        text:
-          '…cada dia que passa, o meu amor por ti cresce. Lembro-me de quando nos ' +
-          'conhecemos, era um dia de sol como hoje. Fiquei tão nervoso! Eram tantas ' +
-          'coisas para te dizer…',
+        text:`Não era pra eu gostar de você. Nos conhecemos em um momento em que eu queria companhia, chamava de carência. Queria uma pessoa pra sentar do meu lado em um banco para passar o tempo.
+Mudou quando olhei pro lado e vi quem estava lá. Acho que isso foi em dezembro, olhei pra uma estrelinha brilhando, uma luz que me trouxe algo que eu já tinha deixado pra trás: inspiração pra desenhar, música e escrever.
+Obrigado por isso. Teve uma vez que eu guardo na memória: estávamos sentados em um banco na praça do shopping Estação. Eu tinha falado que te amava — tava naquela época que você não acreditava e falava que era mentira.
+`,
         typewriter: false,
         showMusicAfter: false,
         photos: [
@@ -38,8 +40,63 @@
           'assets/polaroid2.svg',
           'assets/polaroid3.svg'
         ],
-        openGalleryOnEntry: true
-      }
+        openGalleryOnEntry: false
+      },
+      {
+        text:`Então tive que explicar o porquê disso: conheci uma artista, onde me identifiquei com seus poemas, podia chamar pra desenhar e tinha um gosto de música igual (o seu é melhor), e só isso já significava muito pra mim.
+Você é maluca, veio pra uma cidade sozinha tendo apenas uma amiga aqui, tudo por causa de um sonho. Já disse que tenho inveja dessa sua coragem. Você comentou como foi o começo aqui, como foi difícil passar algumas noites sozinha.
+E é compreensível. Na situação que você tava, ter com quem contar pra se apoiar era muito importante, e você tentou. Lembro de quando contava dos seus amigos do trabalho, e toda a bagunça que deu com eles.
+`,
+        typewriter: false,
+        showMusicAfter: false,
+        photos: [
+          'assets/polaroid1.svg',
+          'assets/polaroid2.svg',
+          'assets/polaroid3.svg'
+        ],
+        openGalleryOnEntry: false
+      },
+      {
+        text:`Você ama churrasco, por isso no seu aniversário queria ir numa churrascaria onde o aniversariante não paga. Tinha convidado eles pra ir, nem lembro o motivo, mas não deu certo e ficou de passar o aniversário sozinha em casa.
+Sei como amizade é importante pra você, então sei como ficou mal com toda essa situação. Pra não ficar mal, fui no seu aniversário, porque não posso deixar minha estrelinha perder o brilho.
+Por isso tava sempre tentando te agradar, comprando os presentes que você queria, porque sei que você não podia, e se não tinha outro amigo pra isso, assumo o posto pra ajudar.
+`,
+        typewriter: false,
+        showMusicAfter: false,
+        photos: [
+          'assets/polaroid1.svg',
+          'assets/polaroid2.svg',
+          'assets/polaroid3.svg'
+        ],
+        openGalleryOnEntry: false
+      },
+      {
+        text:`Engraçado, quando comentava que ia fazer teatro pra ser dubladora, eu ficava brincando que isso não ia dar dinheiro. Isso pode ocorrer pra outras pessoas, mas pra você isso não se enquadra.
+Você é a pessoa mais dedicada que eu conheço. Fiquei muito feliz quando fiquei sabendo que tava na faculdade. Sabia que ia encontrar amigos com a mesma vibe que você.
+Adorei ter conhecido eles, porque ficar nessa cidade chata ia ficar muito mais fácil.
+`,
+        typewriter: false,
+        showMusicAfter: false,
+        photos: [
+          'assets/polaroid1.svg',
+          'assets/polaroid2.svg',
+          'assets/polaroid3.svg'
+        ],
+        openGalleryOnEntry: false
+      },
+      {
+        text:`Quero agradecer por esse ano de amizade com você, por cada passeio, cada filme que assistimos, cada momento que estava ruim.
+Mas por estar com você já melhorar. Tô renovando nosso contrato de amizade por mais um ano. Não pode quebrar, se não jogo maldição na sua carreira de dubladora. Te amo, fofa.
+`,
+        typewriter: false,
+        showMusicAfter: false,
+        photos: [
+          'assets/polaroid1.svg',
+          'assets/polaroid2.svg',
+          'assets/polaroid3.svg'
+        ],
+        openGalleryOnEntry: false
+      },
     ]
   };
   /* ========================================================================= */
